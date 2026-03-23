@@ -1,0 +1,26 @@
+[env]
+DATABASE_URL = ${DATABASE_URL}
+SUPABASE_KEY = ${SUPABASE_KEY}
+SUPABASE_URL = ${SUPABASE_URL}
+SUPABASE_SECRET = ${SUPABASE_SECRET}
+SECRET_KEY = ${SECRET_KEY}
+
+[variables]
+DATABASE_URL = "postgresql://user:password@host:port/dbname"
+SUPABASE_KEY = "your-supabase-key"
+SUPABASE_URL = "https://your-supabase-url.supabase.co"
+SUPABASE_SECRET = "your-supabase-secret"
+SECRET_KEY = "your-secret-key"
+
+[services]
+web = "uvicorn main:app --host 0.0.0.0 --port 8000"
+
+[deploy]
+branch = "main"
+static_sites = []
+
+[build]
+command = "poetry install && poetry run python -m compileall ."
+
+[start]
+command = "poetry run uvicorn main:app --host 0.0.0.0 --port 8000"
